@@ -1,4 +1,3 @@
-from crypt import methods
 from flask import Flask, jsonify,request
 
 app = Flask(__name__)
@@ -29,7 +28,7 @@ def agregar_productos():
         "cantidad":request.json['cantidad']
     }
     productos.append(nuevo_producto)
-    return jsonify({"mensaje":"Prodcuto agregado satisfactoriamente","productos":productos})
+    return jsonify({"mensaje":"Producto agregado satisfactoriamente","productos":productos})
 
 @app.route('/productos/<string:nombre_producto>', methods = ['PUT'])
 def editProducto(nombre_producto):
@@ -39,10 +38,10 @@ def editProducto(nombre_producto):
         busca_producto[0]['precio'] = request.json ['precio']
         busca_producto[0]['cantidad'] = request.json ['cantidad']
         return jsonify({
-            "mensaje": 'Prodcuto actualizado',
+            "mensaje": 'Producto actualizado',
             "producto": busca_producto[0]
         })
-    return jsonify({"mensaje": 'Prodcuto no encontrado'})        
+    return jsonify({"mensaje": 'Producto no encontrado'})        
 
 @app.route('/productos/<string:nombre_producto>', methods = ['DELETE'])
 def eliminarProducto(nombre_producto):
@@ -54,5 +53,7 @@ def eliminarProducto(nombre_producto):
             "productos" : productos
         })
     return jsonify({"mensaje":"Producto no encontrado"})
+
+
 if __name__ == '__main__':
     app.run(debug = True, port = 5000) 
